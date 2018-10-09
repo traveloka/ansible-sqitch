@@ -1,0 +1,4 @@
+---
+# defaults file for sqitch
+
+sqitch_version: 0.9994
