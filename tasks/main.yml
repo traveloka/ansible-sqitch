@@ -20,6 +20,14 @@
     tags:
       - libc6-dev
   
+  - name: install build-essential
+    apt:
+      name: build-essential
+      cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
+      install_recommends: no
+      state: latest
+      update_cache: yes
+  
   - name: install cpanm
     apt:
       name: cpanminus
@@ -37,12 +45,6 @@
       cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
       install_recommends: no
       update_cache: yes
-
-  - name: install sqitch dependency
-    cpanm:
-      name: DWHEELER/App-Sqitch-{{ sqitch_version }}.tar.gz
-      notest: yes
-      installdeps: yes
 
   - name: install sqitch
     cpanm:
