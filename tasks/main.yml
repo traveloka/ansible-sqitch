@@ -38,10 +38,18 @@
       install_recommends: no
       update_cache: yes
 
+  - name: install sqitch dependency
+    cpanm:
+      name: DWHEELER/App-Sqitch-{{ sqitch_version }}.tar.gz
+      notest: yes
+      installdeps: yes
+
   - name: install sqitch
     cpanm:
       name: DWHEELER/App-Sqitch-{{ sqitch_version }}.tar.gz
       notest: yes
+
+      
   become: true
   become_method: sudo
   tags:
