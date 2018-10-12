@@ -2,25 +2,7 @@
 # tasks file for sqitch
 
 - block:
-  - name: install make
-    apt:
-      name: make
-      cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
-      install_recommends: no
-      state: latest
-      update_cache: yes
-  
-  - name: install libc6-dev
-    apt:
-      name: libc6-dev
-      cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
-      install_recommends: no
-      state: latest
-      update_cache: yes
-    tags:
-      - libc6-dev
-  
-  - name: install build-essential
+  - name: ensure build-essential is installed
     apt:
       name: build-essential
       cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
@@ -28,7 +10,7 @@
       state: latest
       update_cache: yes
   
-  - name: install cpanm
+  - name: ensure cpanm is installed
     apt:
       name: cpanminus
       cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
@@ -38,19 +20,10 @@
     tags:
       - cpanm
 
-  - name: install libdbd-pg-perl
-    apt: 
-      name: libdbd-pg-perl
-      state: latest
-      cache_valid_time: "{{ apt_cache_valid_time|default(omit) }}"
-      install_recommends: no
-      update_cache: yes
-
   - name: install sqitch
     cpanm:
       name: DWHEELER/App-Sqitch-{{ sqitch_version }}.tar.gz
       notest: yes
-
       
   become: true
   become_method: sudo
